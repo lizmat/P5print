@@ -11,13 +11,13 @@ module P5print:ver<0.0.1>:auth<cpan:ELIZABETH> {
     my sub term:<<STDERR>>() is export { $*ERR but P5Handle }
 
     # add candidates to handle P5Handle
-    multi sub print(P5Handle $handle, *@_) {
+    multi sub print(P5Handle $handle, *@_) is export {
         $handle.print(@_)
     }
-    multi sub printf(P5Handle $handle, Cool:D $format, *@_) {
+    multi sub printf(P5Handle $handle, Cool:D $format, *@_) is export {
         $handle.printf($format, @_)
     }
-    multi sub say(P5Handle $handle, *@_) {
+    multi sub say(P5Handle $handle, *@_) is export {
         $handle.say(@_)
     }
 }
@@ -30,18 +30,42 @@ P5print - Implement Perl 5's print() and associated built-ins
 
 =head1 SYNOPSIS
 
-  use P5print; # exports print, printf, say, STDIN, STDOUT, STDERR
+    use P5print; # exports print, printf, say, STDIN, STDOUT, STDERR
 
-  print STDOUT, "foo";
+    print STDOUT, "foo";
 
-  printf STDERR, "%s", $bar;
+    printf STDERR, "%s", $bar;
 
-  say STDERR, "foobar";      # same as "note"
+    say STDERR, "foobar";      # same as "note"
 
 =head1 DESCRIPTION
 
 This module tries to mimic the behaviour of the C<print>, C<printf> and
 C<say> builtin functions of Perl 5 as closely as possible.
+
+=head1 PORTING CAVEATS
+
+In Perl 6, there B<must> be a comma after the handle, as opposed to Perl 5
+where the whitespace after the handle indicates indirect object syntax.
+
+    print STDERR "whee!";   # Perl 5 way
+
+    print STDERR, "whee!";  # Perl 6 mimicing Perl 5
+
+=head1 IDIOMATIC PERL 6 WAYS
+
+When needing to write to specific handle, it's probably easier to use the
+method form.
+
+    $handle.print("foo");
+    $handle.printf("foo");
+    $handle.say("foo");
+
+If you want to do a C<say> on C<STDERR>, this is easier done with the C<note>
+builtin function:
+
+    $*ERR.say("foo");  # "foo\n" on standard error
+    note "foo";        # same
 
 =head1 AUTHOR
 
