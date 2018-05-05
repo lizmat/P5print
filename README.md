@@ -30,6 +30,11 @@ In Perl 6, there **must** be a comma after the handle, as opposed to Perl 5 wher
 
     print STDERR, "whee!";  # Perl 6 mimicing Perl 5
 
+Perl 6 warnings on P5-isms kick in when calling `print` or `say` without any parameters or parentheses. This warning can be circumvented by adding `()` to the call, so:
+
+    print;   # will complain
+    print(); # won't complain and print $_
+
 IDIOMATIC PERL 6 WAYS
 =====================
 

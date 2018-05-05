@@ -2,7 +2,7 @@ use v6.c;
 use Test;
 use P5print;
 
-plan 14;
+plan 16;
 
 # Cannot easily check whether print / printf / say were exported, as they
 # are additions to the existing multi subs.
@@ -46,6 +46,16 @@ class FakeHandle {
 
     say STDERR, "baz";
     is $said, "baz", 'was "baz" said with printf to STDERR';
+
+    given "zippo" {
+        print();  # alas, need ()
+        is $said, $_, "was '$_' said with print";
+    }
+
+    given "zappo" {
+        say();  # alas, need ()
+        is $said, $_, "was '$_' said with say";
+    }
 }
 
 # vim: ft=perl6 expandtab sw=4

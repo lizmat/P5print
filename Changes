@@ -1,6 +1,7 @@
 Revision history for P5print
 
 {{$NEXT}}
+    - add support for P5 semantics of print() and say()
 
 0.0.1  2018-05-05T16:13:45+02:00
     - Initial version

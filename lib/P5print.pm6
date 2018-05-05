@@ -3,7 +3,7 @@ use v6.c;
 # role to distinguish normal Perl 5 handles from normal IO::Handles
 my role P5Handle { }
 
-module P5print:ver<0.0.1>:auth<cpan:ELIZABETH> {
+module P5print:ver<0.0.2>:auth<cpan:ELIZABETH> {
 
     # create standard Perl 5 handles and export them
     my sub term:<<STDIN>>()  is export { $*IN  but P5Handle }
@@ -14,11 +14,17 @@ module P5print:ver<0.0.1>:auth<cpan:ELIZABETH> {
     multi sub print(P5Handle $handle, *@_) is export {
         $handle.print(@_)
     }
+    multi sub print() is default is export {
+        $*OUT.print(CALLERS::<$_>)
+    }
     multi sub printf(P5Handle $handle, Cool:D $format, *@_) is export {
         $handle.printf($format, @_)
     }
     multi sub say(P5Handle $handle, *@_) is export {
         $handle.say(@_)
+    }
+    multi sub say() is default is export {
+        $*OUT.say(CALLERS::<$_>)
     }
 }
 
@@ -51,6 +57,13 @@ where the whitespace after the handle indicates indirect object syntax.
     print STDERR "whee!";   # Perl 5 way
 
     print STDERR, "whee!";  # Perl 6 mimicing Perl 5
+
+Perl 6 warnings on P5-isms kick in when calling C<print> or C<say> without
+any parameters or parentheses.  This warning can be circumvented by adding
+C<()> to the call, so:
+
+    print;   # will complain
+    print(); # won't complain and print $_
 
 =head1 IDIOMATIC PERL 6 WAYS
 
