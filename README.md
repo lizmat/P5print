@@ -1,9 +1,7 @@
-[![Build Status](https://travis-ci.org/lizmat/P5print.svg?branch=master)](https://travis-ci.org/lizmat/P5print)
-
 NAME
 ====
 
-P5print - Implement Perl 5's print() and associated built-ins
+P5print - Implement Perl's print() and associated built-ins
 
 SYNOPSIS
 ========
@@ -19,7 +17,7 @@ SYNOPSIS
 DESCRIPTION
 ===========
 
-This module tries to mimic the behaviour of the `print`, `printf` and `say` functions of Perl 5 as closely as possible.
+This module tries to mimic the behaviour of the `print`, `printf` and `say` functions of Perl as closely as possible.
 
 ORIGINAL PERL 5 DOCUMENTATION
 =============================
@@ -103,13 +101,13 @@ ORIGINAL PERL 5 DOCUMENTATION
 PORTING CAVEATS
 ===============
 
-In Perl 6, there **must** be a comma after the handle, as opposed to Perl 5 where the whitespace after the handle indicates indirect object syntax.
+In Raku, there **must** be a comma after the handle, as opposed to Perl where the whitespace after the handle indicates indirect object syntax.
 
-    print STDERR "whee!";   # Perl 5 way
+    print STDERR "whee!";   # Perl way
 
-    print STDERR, "whee!";  # Perl 6 mimicing Perl 5
+    print STDERR, "whee!";  # Raku mimicing Perl
 
-Perl 6 warnings on P5-isms kick in when calling `print` or `say` without any parameters or parentheses. This warning can be circumvented by adding `()` to the call, so:
+Raku warnings on P5-isms kick in when calling `print` or `say` without any parameters or parentheses. This warning can be circumvented by adding `()` to the call, so:
 
     print;   # will complain
     print(); # won't complain and print $_
@@ -138,9 +136,9 @@ Source can be located at: https://github.com/lizmat/P5print . Comments and Pull 
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2018 Elizabeth Mattijsen
+Copyright 2018-2019 Elizabeth Mattijsen
 
-Re-imagined from Perl 5 as part of the CPAN Butterfly Plan.
+Re-imagined from Perl as part of the CPAN Butterfly Plan.
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

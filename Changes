@@ -2,6 +2,9 @@ Revision history for P5print
 
 {{$NEXT}}
 
+0.0.4  2019-11-10T14:30:58+01:00
+    - Changed Perl 6 to Raku, and Perl 5 to Perl
+
 0.0.3  2018-05-21T20:58:27+02:00
     - Added original Perl 5 documentation
 
