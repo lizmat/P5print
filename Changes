@@ -2,6 +2,13 @@ Revision history for P5print
 
 {{$NEXT}}
 
+0.0.5  2020-11-11T22:05:17+01:00
+    - Change name of distribution
+    - Force to highest possible Raku version
+    - Update copyright year
+    - Add PORTING CAVEATS section about access caller's $_
+    - Add mention of "use isms"
+
 0.0.4  2019-11-10T14:30:58+01:00
     - Changed Perl 6 to Raku, and Perl 5 to Perl
 

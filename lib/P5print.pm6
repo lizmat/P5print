@@ -1,9 +1,9 @@
-use v6.c;
+use v6.d;
 
 # role to distinguish normal Perl handles from normal IO::Handles
 my role P5Handle { }
 
-module P5print:ver<0.0.4>:auth<cpan:ELIZABETH> {
+module P5print:ver<0.0.5>:auth<cpan:ELIZABETH> {
 
     # create standard Perl handles and export them
     my sub term:<<STDIN>>()  is export { $*IN  but P5Handle }
@@ -32,7 +32,7 @@ module P5print:ver<0.0.4>:auth<cpan:ELIZABETH> {
 
 =head1 NAME
 
-P5print - Implement Perl's print() and associated built-ins
+Raku port of Perl's print() and associated built-ins
 
 =head1 SYNOPSIS
 
@@ -46,8 +46,8 @@ P5print - Implement Perl's print() and associated built-ins
 
 =head1 DESCRIPTION
 
-This module tries to mimic the behaviour of the C<print>, C<printf> and
-C<say> functions of Perl as closely as possible.
+This module tries to mimic the behaviour of Perl's C<print>, C<printf> and
+C<say> built-ins as closely as possible in the Raku Programming Language.
 
 =head1 ORIGINAL PERL 5 DOCUMENTATION
 
@@ -129,6 +129,8 @@ C<say> functions of Perl as closely as possible.
 
 =head1 PORTING CAVEATS
 
+=head2 Syntax differences
+
 In Raku, there B<must> be a comma after the handle, as opposed to Perl
 where the whitespace after the handle indicates indirect object syntax.
 
@@ -136,12 +138,33 @@ where the whitespace after the handle indicates indirect object syntax.
 
     print STDERR, "whee!";  # Raku mimicing Perl
 
-Raku warnings on P5-isms kick in when calling C<print> or C<say> without
-any parameters or parentheses.  This warning can be circumvented by adding
-C<()> to the call, so:
+=head2 Parentheses
 
-    print;   # will complain
-    print(); # won't complain and print $_
+Because of some overzealous checks for Perl 5isms, it is necessary to put
+parentheses when using C<print> and C<say> as a function.  Since the
+2018.09 Rakudo compiler release, it is possible to use the C<isms> pragma
+to avoid having to do that:
+
+    use isms <Perl5>;
+    $_ = "foo";
+    say;    # foo
+
+=head2 $_ no longer accessible from caller's scope
+
+In future language versions of Raku, it will become impossible to access the
+C<$_> variable of the caller's scope, because it will not have been marked as
+a dynamic variable.  So please consider changing:
+
+    print;
+
+to either:
+
+    print($_);
+
+or, using the subroutine as a method syntax, with the prefix C<.> shortcut
+to use that scope's C<$_> as the invocant:
+
+    .&print;
 
 =head1 IDIOMATIC PERL 6 WAYS
 
@@ -167,10 +190,12 @@ Pull Requests are welcome.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2018-2019 Elizabeth Mattijsen
+Copyright 2018-2020 Elizabeth Mattijsen
 
 Re-imagined from Perl as part of the CPAN Butterfly Plan.
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
 =end pod
+
+# vim: expandtab shiftwidth=4
