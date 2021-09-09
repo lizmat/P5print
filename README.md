@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/lizmat/P5print/workflows/test/badge.svg)](https://github.com/lizmat/P5print/actions)
+
 NAME
 ====
 
@@ -151,14 +153,14 @@ If you want to do a `say` on `STDERR`, this is easier done with the `note` built
 AUTHOR
 ======
 
-Elizabeth Mattijsen <liz@wenzperl.nl>
+Elizabeth Mattijsen <liz@raku.rocks>
 
 Source can be located at: https://github.com/lizmat/P5print . Comments and Pull Requests are welcome.
 
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2018-2020 Elizabeth Mattijsen
+Copyright 2018, 2019, 2020, 2021 Elizabeth Mattijsen
 
 Re-imagined from Perl as part of the CPAN Butterfly Plan.
 
