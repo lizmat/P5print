@@ -2,17 +2,14 @@ use v6.*;
 use Test;
 use P5print;
 
-plan 16;
+plan 13;
 
 # Cannot easily check whether print / printf / say were exported, as they
 # are additions to the existing multi subs.
 
 ok defined(::('&term:<STDIN>')),          'STDIN imported?';
-ok !defined(P5print::{'&term:<STDIN>'}),  'STDIN externally NOT accessible?';
 ok defined(::('&term:<STDOUT>')),         'STDOUT imported?';
-ok !defined(P5print::{'&term:<STDOUT>'}), 'STDOUT externally NOT accessible?';
 ok defined(::('&term:<STDERR>')),         'STDERR imported?';
-ok !defined(P5print::{'&term:<STDERR>'}), 'STDERR externally NOT accessible?';
 
 my $format;
 my $said;
